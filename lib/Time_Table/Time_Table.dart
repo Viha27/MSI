@@ -9,6 +9,7 @@ import 'package:postgrad/Exam_Results/ExamResults.dart';
 import 'package:postgrad/services/teacher_service.dart';
 import 'package:postgrad/services/token_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:date_time_format/date_time_format.dart';
 
 class Timetable extends StatefulWidget {
   _TimetableState createState() => _TimetableState();
@@ -35,15 +36,13 @@ class _TimetableState extends State<Timetable> {
     setState(() {
       isLoading = true;
     });
-    var url = "http://10.0.2.2:3000/api/get-timetable";
-    var token = await getStringValuesSF();
-    var response = await http.post(url, headers: {
-      'authentication': 'Bearer $token',
-    });
+    var url = "http://10.0.2.2:3000/api/get-timetable/184061R/3";
+    //var token = await getStringValuesSF();
+    var response = await http.post(url);
     //print(response.body);
     if (response.statusCode == 200) {
-      var items = json.decode(response.body)['times'];
-      var times = json.decode(response.body)['lectureHours'];
+      var items = json.decode(response.body);
+      //var times = json.decode(response.body)['lectureHours'];
       print(items);
       setState(() {
         courseModules = items;
@@ -64,7 +63,14 @@ class _TimetableState extends State<Timetable> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Time Table"),
+          title: Text(
+            "Time Table",
+            style: TextStyle(color: Colors.brown),
+          ),
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.brown, //change your color here
+          ),
         ),
         //body: getBody(),
         body: getBody());
@@ -79,30 +85,47 @@ class _TimetableState extends State<Timetable> {
   }
 
   Widget getCard(index) {
-    var moduleName = index['moduleCode'] + " " + index['moduleName'];
-    var description = index['moduleName'];
-    var credits1 = index['type'].toString();
-    var credits = index['type'].toString();
-    var semester = "Start : " + index['startingTime'].toString();
-    var semester1 = "End : " + index['endingTime'].toString();
-    var lecturehall = index['LectureHall'];
+    var moduleName = index['Subject'];
+    //var description = index['moduleName'];
+    var credits1 = index['Description'].toString();
+    var credits = index['Description'].toString();
+    var start = DateTime.parse(index['StartTime']);
+    var end = DateTime.parse(index['EndTime']);
+    //var lecturehall = index['LectureHall'];
     var color1;
+    var icon;
+    var color2;
 
     if (credits1 == "Lecture") {
-      color1 = Colors.cyanAccent;
+      color1 = Colors.white;
+      color2 = Colors.deepOrangeAccent;
+      icon = Icons.people;
     } else {
-      color1 = Colors.yellowAccent;
+      color1 = Colors.yellow[100];
+      color2 = Colors.pinkAccent;
+      icon = Icons.computer;
     }
 
     return Card(
       color: color1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
       shadowColor: Colors.brown,
-      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
       child: ListTile(
-        leading: Icon(
-          Icons.assignment,
-          size: 40,
-          color: Colors.red,
+        leading: Container(
+          width: 65,
+          height: 60,
+          decoration: BoxDecoration(
+            color: color2,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Icon(
+            icon,
+            size: 50,
+            color: Colors.white,
+          ),
         ),
         title: Column(children: [
           Column(
@@ -114,19 +137,12 @@ class _TimetableState extends State<Timetable> {
                 moduleName.toString(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                  color: Colors.brown,
+                  fontSize: 18.0,
+                  color: Colors.black,
                 ),
               ),
               SizedBox(
                 height: 10,
-              ),
-              Text(
-                lecturehall.toString(),
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.brown,
-                ),
               ),
             ],
           ),
@@ -137,24 +153,27 @@ class _TimetableState extends State<Timetable> {
                 credits.toString(),
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Colors.brown,
+                  fontWeight: FontWeight.bold,
+                  color: color2,
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
-                semester.toString(),
+                'Start :' +
+                    (DateTimeFormat.format(start, format: 'D, M j, H:i')),
                 style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.brown,
-                ),
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey),
               ),
               Text(
-                semester1.toString(),
+                'End  :' + (DateTimeFormat.format(end, format: 'D, M j, H:i')),
                 style: TextStyle(
                   fontSize: 18.0,
-                  color: Colors.brown,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueGrey,
                 ),
               ),
               SizedBox(

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad/services/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_button/sign_button.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({Key key}) : super(key: key);
@@ -61,41 +62,84 @@ class _SigninState extends State<SignIn> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/UoM_logo.png',
+                width: 100,
+                height: 200,
+              ),
               Text(
-                "Login",
-                style: TextStyle(fontSize: 32),
+                "Management Information  ",
+                style: TextStyle(fontSize: 25),
+              ),
+              Text(
+                "System",
+                style: TextStyle(fontSize: 25),
               ),
               SizedBox(
                 height: 20,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(20),
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: TextField(
                   controller: _userNameController,
-                  decoration: InputDecoration(hintText: "Username"),
+                  decoration: InputDecoration(
+                      hintText: "Username",
+                      border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(10.0),
+                        ),
+                      ),
+                      filled: true,
+                      hintStyle: new TextStyle(color: Colors.grey[800]),
+                      fillColor: Colors.white70),
                 ),
               ),
-              Padding(padding: EdgeInsets.all(20)),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(20),
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: TextField(
                   obscureText: true,
                   controller: _passwordController,
-                  decoration: InputDecoration(hintText: "Password"),
+                  decoration: InputDecoration(
+                      hintText: "Password",
+                      border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(10.0),
+                        ),
+                      ),
+                      filled: true,
+                      hintStyle: new TextStyle(color: Colors.grey[800]),
+                      fillColor: Colors.white70),
                 ),
               ),
               SizedBox(
-                height: 60,
-                width: MediaQuery.of(context).size.width,
+                height: 10,
+              ),
+              FlatButton(
+                onPressed: () {
+                  //TODO FORGOT PASSWORD SCREEN GOES HERE
+                },
+                child: Text(
+                  'Forgot Password ?',
+                  style: TextStyle(color: Colors.blue, fontSize: 15),
+                ),
+              ),
+              Container(
+                height: 50,
+                width: 200,
                 child: RaisedButton(
-                  color: Colors.lightBlueAccent,
-                  child: Text("Sign In"),
+                  hoverColor: Colors.blue,
+                  color: Colors.blue,
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                   onPressed: _userNameController.text == "" ||
                           _passwordController.text == ""
                       ? null
@@ -109,15 +153,6 @@ class _SigninState extends State<SignIn> {
                 ),
               ),
               Padding(padding: EdgeInsets.all(20)),
-              SizedBox(
-                height: 60,
-                width: MediaQuery.of(context).size.width,
-                child: FlatButton(
-                  color: Colors.lightGreenAccent,
-                  child: Text("Forgot Password..?"),
-                  onPressed: () {},
-                ),
-              ),
             ],
           ),
         ),

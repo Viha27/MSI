@@ -26,7 +26,12 @@ class _MenuState extends State<Menu> {
       title: title,
       home: Scaffold(
           appBar: AppBar(
-            title: Text(title),
+            title: Text(
+              'Main Menu',
+              style: TextStyle(color: Colors.brown),
+            ),
+            backgroundColor: Colors.white,
+            centerTitle: true,
           ),
           body: Padding(
             padding: EdgeInsets.fromLTRB(36, 40, 10, 10),
@@ -35,33 +40,35 @@ class _MenuState extends State<Menu> {
                 Row(children: [
                   Column(children: [
                     Container(
-                        height: 150,
-                        width: 150,
-                        color: Colors.blue,
-                        child: RaisedButton(
-                          color: Colors.blue,
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CourseModules())),
-                          child: Text(
-                            "Course Modules",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            textAlign: TextAlign.center,
+                      height: 150,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50)),
+                      child: FlatButton(
+                        color: Colors.blueGrey,
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CourseModules())),
+                        child: Text(
+                          "Course Modules",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
                           ),
-                        )),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
                   ]),
                   Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
                   Column(children: [
                     Container(
                         height: 150,
                         width: 150,
-                        color: Colors.blue,
+                        color: Colors.blueGrey,
                         child: RaisedButton(
-                          color: Colors.blue,
+                          color: Colors.blueGrey,
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -83,9 +90,9 @@ class _MenuState extends State<Menu> {
                     Container(
                         height: 150,
                         width: 150,
-                        color: Colors.blue,
+                        color: Colors.blueGrey,
                         child: RaisedButton(
-                          color: Colors.blue,
+                          color: Colors.blueGrey,
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -105,9 +112,9 @@ class _MenuState extends State<Menu> {
                     Container(
                         height: 150,
                         width: 150,
-                        color: Colors.blue,
+                        color: Colors.blueGrey,
                         child: RaisedButton(
-                          color: Colors.blue,
+                          color: Colors.blueGrey,
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -129,9 +136,9 @@ class _MenuState extends State<Menu> {
                     Container(
                         height: 150,
                         width: 150,
-                        color: Colors.blue,
+                        color: Colors.blueGrey,
                         child: RaisedButton(
-                          color: Colors.blue,
+                          color: Colors.blueGrey,
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -151,9 +158,9 @@ class _MenuState extends State<Menu> {
                     Container(
                         height: 150,
                         width: 150,
-                        color: Colors.blue,
+                        color: Colors.blueGrey,
                         child: RaisedButton(
-                          color: Colors.blue,
+                          color: Colors.blueGrey,
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
