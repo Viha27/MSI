@@ -20,6 +20,16 @@ class _TimetableState extends State<Timetable> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
     String stringValue = prefs.getString('token');
+
+    print(stringValue);
+    return stringValue;
+  }
+
+  getStringValuesUN() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString('username');
+
     print(stringValue);
     return stringValue;
   }
@@ -36,9 +46,11 @@ class _TimetableState extends State<Timetable> {
     setState(() {
       isLoading = true;
     });
-    var url = "http://10.0.2.2:3000/api/get-timetable/184061R/3";
+
+    var uname = await getStringValuesUN();
+    var url = "http://10.0.2.2:3000/api/get-timetable/$uname/3";
     //var token = await getStringValuesSF();
-    var response = await http.post(url);
+    var response = await http.get(url);
     //print(response.body);
     if (response.statusCode == 200) {
       var items = json.decode(response.body);

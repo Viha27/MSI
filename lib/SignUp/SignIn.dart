@@ -38,7 +38,8 @@ class _SigninState extends State<SignIn> {
         setState(() {
           _isLoading = false;
         });
-        sharedPreferences.setString("token", jsonResponse['token']);
+        //sharedPreferences.setString("token", jsonResponse['token']);
+        sharedPreferences.setString("username", jsonResponse['username']);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => Menu()),
             (Route<dynamic> route) => false);

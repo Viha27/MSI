@@ -11,11 +11,11 @@ import 'package:postgrad/services/token_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:date_time_format/date_time_format.dart';
 
-class Requests extends StatefulWidget {
-  _RequestsState createState() => _RequestsState();
+class Request extends StatefulWidget {
+  _RequestState createState() => _RequestState();
 }
 
-class _RequestsState extends State<Requests> {
+class _RequestState extends State<Request> {
   getStringValuesSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
@@ -43,7 +43,7 @@ class _RequestsState extends State<Requests> {
     });
     //print(response.body);
     if (response.statusCode == 200) {
-      var items = json.decode(response.body);
+      var items = json.decode(response.body)['requestTypes'];
       // var times = json.decode(response.body)['lectureHours'];
       print(items);
       setState(() {
@@ -87,14 +87,14 @@ class _RequestsState extends State<Requests> {
   }
 
   Widget getCard(index) {
-    var status = index['remarks'];
-    var date = DateTime.parse(index['date']);
-    var reqId = index['requestID'].toString();
-    //var finalDecision = index['finalDecision'].toString();
+    var status = index['request'];
+    /* var date = DateTime.parse(index['date']);
+    var reqId = index['requestId'].toString();
+    var finalDecision = index['finalDecision'].toString();
     var decision;
-    var request;
-
-    /*  if (finalDecision == '1') {
+    var request; */
+/* 
+    if (finalDecision == '1') {
       decision = 'Pending - Reviewer Level 1 ';
     } else if (finalDecision == '2') {
       decision = 'Pending - Reviewer Level 2 ';
@@ -102,22 +102,22 @@ class _RequestsState extends State<Requests> {
       decision = 'Pending - Reviewer Level 3 ';
     } else {
       decision = 'Accepted';
-    } */
+    }
 
     if (reqId == '6') {
       request = 'Extension - Permitted Duration up to maximum duration ';
-    } else if (reqId == '5') {
+    } else if (finalDecision == '5') {
       request =
           'To sit examinations with next batch as first attempt candidate ';
-    } else if (reqId == '4') {
+    } else if (finalDecision == '4') {
       request = 'Deferment ';
-    } else if (reqId == '3') {
+    } else if (finalDecision == '3') {
       request = 'Extension - Permitted Duration up to maximum duration ';
-    } else if (reqId == '2') {
+    } else if (finalDecision == '2') {
       request = 'Deregistration from course module ';
     } else {
       request = 'Request is not Valid';
-    }
+    } */
 
     /* var description = index['description'];
     var credits = "Credits: " + index['credits'].toString();
@@ -153,7 +153,7 @@ class _RequestsState extends State<Requests> {
                   width: 250,
                   child: Column(
                     children: [
-                      Text(
+                      /* Text(
                         request,
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
@@ -172,7 +172,7 @@ class _RequestsState extends State<Requests> {
                       ),
                       SizedBox(
                         height: 20,
-                      ),
+                      ), */
                       Text(
                         status.toString(),
                         style: TextStyle(
@@ -183,13 +183,13 @@ class _RequestsState extends State<Requests> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      /* Text(
                         decision,
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.greenAccent[700]),
-                      ),
+                      ), */
                     ],
                   ),
                 )

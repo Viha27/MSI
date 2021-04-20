@@ -20,6 +20,15 @@ class _AttendanceState extends State<Attendance> {
     //Return String
     String stringValue = prefs.getString('token');
 
+    //print(stringValue);
+    return stringValue;
+  }
+
+  getStringValuesUN() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString('username');
+
     print(stringValue);
     return stringValue;
   }
