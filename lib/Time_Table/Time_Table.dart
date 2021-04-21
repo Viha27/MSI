@@ -110,11 +110,11 @@ class _TimetableState extends State<Timetable> {
 
     if (credits1 == "Lecture") {
       color1 = Colors.white;
-      color2 = Colors.deepOrangeAccent;
+      color2 = Colors.blue;
       icon = Icons.people;
     } else {
       color1 = Colors.yellow[100];
-      color2 = Colors.pinkAccent;
+      color2 = Colors.red;
       icon = Icons.computer;
     }
 
@@ -135,7 +135,7 @@ class _TimetableState extends State<Timetable> {
           ),
           child: Icon(
             icon,
-            size: 50,
+            size: 45,
             color: Colors.white,
           ),
         ),
@@ -150,7 +150,7 @@ class _TimetableState extends State<Timetable> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
-                  color: Colors.black,
+                  color: Colors.brown,
                 ),
               ),
               SizedBox(
@@ -165,7 +165,6 @@ class _TimetableState extends State<Timetable> {
                 credits.toString(),
                 style: TextStyle(
                   fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
                   color: color2,
                 ),
               ),
@@ -177,14 +176,14 @@ class _TimetableState extends State<Timetable> {
                     (DateTimeFormat.format(start, format: 'D, M j, H:i')),
                 style: TextStyle(
                     fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     color: Colors.blueGrey),
               ),
               Text(
                 'End  :' + (DateTimeFormat.format(end, format: 'D, M j, H:i')),
                 style: TextStyle(
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   color: Colors.blueGrey,
                 ),
               ),

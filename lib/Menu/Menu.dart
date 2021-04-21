@@ -225,16 +225,14 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Text(
-              'Undergraduate Department\nFaculty of Information Technology',
-              style: TextStyle(color: Colors.yellow, fontSize: 20),
+              'Postgraduate Department\nFaculty of Information Technology',
+              style: TextStyle(color: Colors.yellowAccent, fontSize: 20),
             ),
             decoration: BoxDecoration(
-              color: Colors.brown,
-
-              //image: DecorationImage(
-              //  fit: BoxFit.fill,
-              //image: AssetImage('assets/images/cover.jpg'))
-            ),
+                color: Colors.brown,
+                image: DecorationImage(
+                    image: AssetImage("assets/images/fac.jpg"),
+                    fit: BoxFit.cover)),
           ),
           ListTile(
             leading: Icon(Icons.input),

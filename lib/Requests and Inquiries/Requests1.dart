@@ -146,31 +146,31 @@ class _ReqState extends State<Req> {
                               format: AmericanDateFormats.dayOfWeek)),
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 3,
                     ),
                     Text(
                       'Remarks: ' + remark.toString(),
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 3,
                     ),
                     Text(
                       'Decision: ' + decision.toString(),
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal),
                     ),
                   ],
                 ),
