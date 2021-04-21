@@ -113,8 +113,8 @@ class _TimetableState extends State<Timetable> {
       color2 = Colors.blue;
       icon = Icons.people;
     } else {
-      color1 = Colors.yellowAccent[100];
-      color2 = Colors.red;
+      color1 = Colors.white;
+      color2 = Colors.redAccent;
       icon = Icons.computer;
     }
 

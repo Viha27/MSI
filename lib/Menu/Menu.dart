@@ -61,15 +61,18 @@ class _MenuState extends State<Menu> {
                         Text(
                           'Postgraduate Department,\nFaculty of Information Technology.',
                           style: TextStyle(
-                              color: Colors.brown,
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 22),
+                              fontSize: 20),
                         )
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
+                  ),
+                  Container(
+                    child: Image.asset('assets/images/homephoto.jpg'),
                   ),
                   Row(children: [
                     Column(children: [
@@ -226,13 +229,13 @@ class NavDrawer extends StatelessWidget {
           DrawerHeader(
             child: Text(
               'Postgraduate Department\nFaculty of Information Technology',
-              style: TextStyle(color: Colors.yellowAccent, fontSize: 20),
+              style: TextStyle(color: Colors.black, fontSize: 20),
             ),
             decoration: BoxDecoration(
                 color: Colors.brown,
                 image: DecorationImage(
-                    image: AssetImage("assets/images/fac.jpg"),
-                    fit: BoxFit.cover)),
+                    image: AssetImage("assets/images/drawer.jpg"),
+                    fit: BoxFit.fill)),
           ),
           ListTile(
             leading: Icon(Icons.input),
