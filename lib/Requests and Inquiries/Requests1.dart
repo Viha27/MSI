@@ -133,9 +133,9 @@ class _ReqState extends State<Req> {
                     Text(
                       "Request No : " + reqId.toString(),
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.purple),
+                          color: Colors.black),
                     ),
                     SizedBox(
                       height: 20,
