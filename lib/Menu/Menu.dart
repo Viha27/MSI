@@ -14,6 +14,7 @@ import 'package:postgrad/SignUp/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad/Time_Table/Time_Table.dart';
+import 'package:postgrad/profile/profile.dart';
 
 class Menu extends StatefulWidget {
   @override
@@ -243,8 +244,8 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.verified_user),
             title: Text('Profile'),
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SignIn())),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Profilepage())),
           ),
           ListTile(
             leading: Icon(Icons.notifications),
