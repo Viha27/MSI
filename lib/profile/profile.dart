@@ -72,7 +72,7 @@ class _MyAppState extends State<Profilepage> {
                                           shape: BoxShape.circle,
                                           image: new DecorationImage(
                                             image: new ExactAssetImage(
-                                                'assets/images/as.png'),
+                                                'assets/images/stu.png'),
                                             fit: BoxFit.cover,
                                           ),
                                         )),

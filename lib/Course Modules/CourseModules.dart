@@ -176,7 +176,7 @@ class _CourseModuleState extends State<CourseModules> {
                                 MaterialPageRoute(
                                     builder: (context) => ExamResults())),
                             child: Text(
-                              "Check Attendance",
+                              "Check Result",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,

@@ -6,10 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad/Attendance/Attendance.dart';
 import 'package:postgrad/Exam_Results/ExamResults.dart';
+import 'package:postgrad/Requests%20and%20Inquiries/Requests.dart';
 import 'package:postgrad/services/teacher_service.dart';
 import 'package:postgrad/services/token_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:date_time_format/date_time_format.dart';
+
+import 'List.dart';
 
 class Req extends StatefulWidget {
   _ReqState createState() => _ReqState();
@@ -191,8 +194,8 @@ class _ReqState extends State<Req> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 color: Colors.blue,
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ExamResults())),
+                onPressed: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Reqs())),
                 child: Text(
                   "Requests",
                   style: TextStyle(

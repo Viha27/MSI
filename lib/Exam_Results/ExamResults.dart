@@ -174,9 +174,9 @@ class _ExamResultsState extends State<ExamResults> {
                                         height: 50,
                                         width: 55,
                                         decoration: BoxDecoration(
-                                            color: Colors.redAccent[400],
+                                            color: Colors.green,
                                             border: Border.all(
-                                              color: Colors.redAccent[400],
+                                              color: Colors.green,
                                             ),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20))),
@@ -194,9 +194,10 @@ class _ExamResultsState extends State<ExamResults> {
                                             height: 50,
                                             width: 55,
                                             decoration: BoxDecoration(
-                                                color: Colors.redAccent[400],
+                                                color: Colors.greenAccent[400],
                                                 border: Border.all(
-                                                  color: Colors.redAccent[400],
+                                                  color:
+                                                      Colors.greenAccent[400],
                                                 ),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20))),
@@ -214,9 +215,9 @@ class _ExamResultsState extends State<ExamResults> {
                                                 height: 50,
                                                 width: 55,
                                                 decoration: BoxDecoration(
-                                                    color: Colors.redAccent,
+                                                    color: Colors.green[400],
                                                     border: Border.all(
-                                                      color: Colors.redAccent,
+                                                      color: Colors.green[400],
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.all(
