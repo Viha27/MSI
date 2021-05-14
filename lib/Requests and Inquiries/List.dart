@@ -10,6 +10,9 @@ import 'package:postgrad/Requests%20and%20Inquiries/Requests1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Reqs extends StatefulWidget {
+  final int index;
+  const Reqs({Key key, this.index}) : super(key: key);
+
   _ReqsState createState() => _ReqsState();
 }
 
@@ -73,14 +76,15 @@ class _ReqsState extends State<Reqs> {
             } else {
               // Show data if exist
               return Column(
-                children: snapshot.data.requests[0].requestTypes
-                    .map(
-                      (req) => ListTile(
-                        leading: Text("${req.requestId}"),
-                        title: Text(req.request),
-                      ),
-                    )
-                    .toList(),
+                children:
+                    snapshot.data.requests[(widget.index) - 1].requestTypes
+                        .map(
+                          (req) => ListTile(
+                            leading: Text("${req.requestId}"),
+                            title: Text(req.request),
+                          ),
+                        )
+                        .toList(),
               );
               /* 
                return ListView(

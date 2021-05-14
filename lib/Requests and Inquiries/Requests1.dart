@@ -196,7 +196,11 @@ class _ReqState extends State<Req> {
                 ),
                 color: Colors.blue,
                 onPressed: () => Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Reqs())),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Reqs(
+                              index: reqId,
+                            ))),
                 child: Text(
                   "Requests",
                   style: TextStyle(
