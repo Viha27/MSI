@@ -39,11 +39,15 @@ dependencies:
   jose: ^0.1.2
   date_time_format: ^1.1.0
   sign_button: ^1.0.2
+  retrofit: any
+  json_annotation: any
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  retrofit_generator: any
+  build_runner: any  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

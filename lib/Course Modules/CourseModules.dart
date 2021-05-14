@@ -43,7 +43,7 @@ class _CourseModuleState extends State<CourseModules> {
     //print(response.body);
     if (response.statusCode == 200) {
       var items = json.decode(response.body)['modules'];
-      var times = json.decode(response.body)['lectureHours'];
+      // var times = json.decode(response.body)['lectureHours'];
       print(items);
       setState(() {
         courseModules = items;

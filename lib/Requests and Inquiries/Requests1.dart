@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:postgrad/Attendance/Attendance.dart';
 import 'package:postgrad/Exam_Results/ExamResults.dart';
 import 'package:postgrad/Requests%20and%20Inquiries/Requests.dart';
+import 'package:postgrad/Requests%20and%20Inquiries/Reviewed.dart';
 import 'package:postgrad/services/teacher_service.dart';
 import 'package:postgrad/services/token_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -213,8 +214,8 @@ class _ReqState extends State<Req> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 color: Colors.blue,
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ExamResults())),
+                onPressed: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Res())),
                 child: Text(
                   "Reviewed By",
                   style: TextStyle(

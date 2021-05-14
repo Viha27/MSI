@@ -9,11 +9,11 @@ import 'package:postgrad/Requests%20and%20Inquiries/Requests1.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Reqs extends StatefulWidget {
-  _ReqsState createState() => _ReqsState();
+class Res extends StatefulWidget {
+  _ResState createState() => _ResState();
 }
 
-class _ReqsState extends State<Reqs> {
+class _ResState extends State<Res> {
   getStringValuesSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
@@ -72,27 +72,16 @@ class _ReqsState extends State<Reqs> {
               return CircularProgressIndicator();
             } else {
               // Show data if exist
-              return Column(
-                children: snapshot.data.requests[0].requestTypes
+              return ListView(
+                children: snapshot.data.requests[0].reasons
                     .map(
-                      (req) => ListTile(
-                        leading: Text("${req.requestId}"),
-                        title: Text(req.request),
+                      (res) => ListTile(
+                        leading: Text("${res.requestId}"),
+                        title: Text(res.reason),
                       ),
                     )
                     .toList(),
               );
-              /* 
-               return ListView(
-                children: snapshot.data.requests[0].requestTypes
-                    .map(
-                      (req) => ListTile(
-                        leading: Text("${req.requestId}"),
-                        title: Text(req.request),
-                      ),
-                    )
-                    .toList(),
-              ); */
             }
           },
         ));
