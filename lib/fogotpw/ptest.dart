@@ -1,20 +1,31 @@
-import 'package:flutter/material.dart';
-import 'package:postgrad/Exam_Results/ExamResults.dart';
-import 'package:postgrad/Menu/Menu.dart';
-import 'package:postgrad/SignUp/SignIn.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
-class Fogotpw extends StatefulWidget {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:postgrad/Menu/Menu.dart';
+import 'package:postgrad/Requests%20and%20Inquiries/Requests1.dart';
+import 'package:postgrad/SignUp/user.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:postgrad/fogotpw/passwordReset.dart';
+import 'package:postgrad/fogotpw/passwordtest.dart';
+import 'package:postgrad/services/api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_button/sign_button.dart';
+
+class SignppIn extends StatefulWidget {
+  SignppIn({Key key}) : super(key: key);
+
   @override
-  _FogotpwState createState() => _FogotpwState();
+  _SigninppState createState() => _SigninppState();
 }
 
-class _FogotpwState extends State<Fogotpw> {
-  TextEditingController _passwordresetController = new TextEditingController();
-  bool _isLoading;
-  fogotPassword(String username) async {
+class _SigninppState extends State<SignppIn> {
+  TextEditingController _passwordresetController = TextEditingController();
+  bool _isLoading = false;
+  signIn(String username) async {
     String url = "http://10.0.2.2:3000/api/send-password-reset-email";
     Map body = {"username": username};
     var jsonResponse;
@@ -29,6 +40,9 @@ class _FogotpwState extends State<Fogotpw> {
           _isLoading = false;
         });
         //sharedPreferences.setString("token", jsonResponse['token']);
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (BuildContext context) => Menu()),
+            (Route<dynamic> route) => false);
       }
     } else {
       setState(() {
@@ -136,12 +150,11 @@ class _FogotpwState extends State<Fogotpw> {
                                     borderRadius: BorderRadius.circular(15.0),
                                   ),
                                   color: Colors.blue,
-                                  onPressed: () => () {
+                                  onPressed: () {
                                     setState(() {
                                       _isLoading = true;
                                     });
-                                    fogotPassword(
-                                        _passwordresetController.text);
+                                    signIn(_passwordresetController.text);
                                   },
                                   child: Text(
                                     "Send",

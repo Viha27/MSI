@@ -10,6 +10,8 @@ import 'package:postgrad/SignUp/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad/fogotpw/passwordReset.dart';
+import 'package:postgrad/fogotpw/passwordtest.dart';
+import 'package:postgrad/fogotpw/ptest.dart';
 import 'package:postgrad/services/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_button/sign_button.dart';
@@ -127,7 +129,7 @@ class _SigninState extends State<SignIn> {
               FlatButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Fogotpw()));
+                      MaterialPageRoute(builder: (context) => SignpIn()));
                   //TODO FORGOT PASSWORD SCREEN GOES HERE
                 },
                 child: Text(
