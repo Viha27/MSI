@@ -75,15 +75,69 @@ class _ReqsState extends State<Reqs> {
             } else {
               // Show data if exist
               return Column(
-                children:
-                    snapshot.data.requests[(widget.index) - 1].requestTypes
-                        .map(
-                          (req) => ListTile(
-                            leading: Text("${req.requestId}"),
-                            title: Text(req.request),
+                children: snapshot
+                    .data.requests[(widget.index) - 1].requestTypes
+                    .map(
+                      (req) => Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
                           ),
-                        )
-                        .toList(),
+                          shadowColor: Colors.brown,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 5.0),
+                          child: ListTile(
+                              title: Column(children: [
+                            Row(
+                              children: [
+                                Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: Colors.pinkAccent,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    child: Text('')),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                SizedBox(
+                                  width: 250,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Text(
+                                        req.request,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                          ]))),
+                    )
+                    .toList(),
               );
               /* 
                return ListView(

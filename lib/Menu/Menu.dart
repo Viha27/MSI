@@ -17,12 +17,22 @@ import 'package:http/http.dart' as http;
 import 'package:postgrad/Time_Table/Time_Table.dart';
 import 'package:postgrad/profile/profile.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Menu extends StatefulWidget {
   @override
   _MenuState createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
+  getStringValuesSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString('token');
+    print(stringValue);
+    return stringValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     final title = 'University of Moratuwa\nFaculty of Information Technology';
@@ -43,8 +53,8 @@ class _MenuState extends State<Menu> {
                   Icons.notifications_active,
                   color: Colors.brown,
                 ),
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Notificationa())),
+                onPressed: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Reqsp())),
                 // do something
               )
             ],
@@ -52,19 +62,40 @@ class _MenuState extends State<Menu> {
             centerTitle: true,
           ),
           body: Padding(
-            padding: EdgeInsets.fromLTRB(36, 20, 10, 10),
+            padding: EdgeInsets.fromLTRB(32, 20, 10, 10),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   SingleChildScrollView(
                     child: Row(
                       children: [
-                        Text(
-                          'Postgraduate Department,\nFaculty of Information Technology.',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                        Container(
+                          margin: EdgeInsets.all(2),
+                          padding: EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            'Postgraduate Department,\nFaculty of Information Technology.',
+                            style: TextStyle(
+                                color: Colors.brown,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
                         )
                       ],
                     ),
@@ -81,9 +112,20 @@ class _MenuState extends State<Menu> {
                         height: 150,
                         width: 150,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.lightBlue.withOpacity(0.4),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                            border:
+                                Border.all(color: Colors.blueAccent, width: 10),
+                            borderRadius: BorderRadius.circular(30)),
                         child: FlatButton(
-                          color: Colors.blueGrey,
+                          color: Colors.blueAccent,
                           onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -102,114 +144,179 @@ class _MenuState extends State<Menu> {
                     Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
                     Column(children: [
                       Container(
-                          height: 150,
-                          width: 150,
-                          color: Colors.blueGrey,
-                          child: RaisedButton(
-                            color: Colors.blueGrey,
-                            onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Timetable())),
-                            child: Text(
-                              "Time Table",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.lightBlue.withOpacity(0.4),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
-                              textAlign: TextAlign.center,
+                            ],
+                            border:
+                                Border.all(color: Colors.blueAccent, width: 10),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: FlatButton(
+                          color: Colors.blueAccent,
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Timetable())),
+                          child: Text(
+                            "Time Table",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
                             ),
-                          )),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ]),
+                  Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
+                  Row(children: [
+                    Column(children: [
+                      Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.lightBlue.withOpacity(0.4),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                            border:
+                                Border.all(color: Colors.blueAccent, width: 10),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: FlatButton(
+                          color: Colors.blueAccent,
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Attendance())),
+                          child: Text(
+                            "Attendance",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ]),
+                    Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
+                    Column(children: [
+                      Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.lightBlue.withOpacity(0.4),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                            border:
+                                Border.all(color: Colors.blueAccent, width: 10),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: FlatButton(
+                          color: Colors.blueAccent,
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ExamResults())),
+                          child: Text(
+                            "Exam Results",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
                     ])
                   ]),
                   Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
                   Row(children: [
                     Column(children: [
                       Container(
-                          height: 150,
-                          width: 150,
-                          color: Colors.blueGrey,
-                          child: RaisedButton(
-                            color: Colors.blueGrey,
-                            onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Attendance())),
-                            child: Text(
-                              "Attendance",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.lightBlue.withOpacity(0.4),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
-                              textAlign: TextAlign.center,
+                            ],
+                            border:
+                                Border.all(color: Colors.blueAccent, width: 10),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: FlatButton(
+                          color: Colors.blueAccent,
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Payments())),
+                          child: Text(
+                            "Payments",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
                             ),
-                          )),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
                     ]),
                     Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
                     Column(children: [
                       Container(
-                          height: 150,
-                          width: 150,
-                          color: Colors.blueGrey,
-                          child: RaisedButton(
-                            color: Colors.blueGrey,
-                            onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ExamResults())),
-                            child: Text(
-                              "Exam Results",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.lightBlue.withOpacity(0.4),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
-                              textAlign: TextAlign.center,
+                            ],
+                            border:
+                                Border.all(color: Colors.blueAccent, width: 10),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: FlatButton(
+                          color: Colors.blueAccent,
+                          onPressed: () => Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Req())),
+                          child: Text(
+                            "Request and Inquiries",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
                             ),
-                          )),
-                    ])
-                  ]),
-                  Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
-                  Row(children: [
-                    Column(children: [
-                      Container(
-                          height: 150,
-                          width: 150,
-                          color: Colors.blueGrey,
-                          child: RaisedButton(
-                            color: Colors.blueGrey,
-                            onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Payments())),
-                            child: Text(
-                              "Payments",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          )),
-                    ]),
-                    Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
-                    Column(children: [
-                      Container(
-                          height: 150,
-                          width: 150,
-                          color: Colors.blueGrey,
-                          child: RaisedButton(
-                            color: Colors.blueGrey,
-                            onPressed: () => Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Req())),
-                            child: Text(
-                              "Requests and Inquiries",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          )),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
                     ])
                   ])
                 ],
@@ -225,23 +332,44 @@ class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.all(10),
         children: <Widget>[
-          DrawerHeader(
-            child: Text(
-              'Postgraduate Department\nFaculty of Information Technology',
-              style: TextStyle(color: Colors.black, fontSize: 20),
+          UserAccountsDrawerHeader(
+            accountName: Text('Roberto Aleydon'),
+            accountEmail: Text('aleydon@gmail.com'),
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: ExactAssetImage('assets/images/stu.png'),
             ),
+            onDetailsPressed: () {},
             decoration: BoxDecoration(
-                color: Colors.brown,
                 image: DecorationImage(
-                    image: AssetImage("assets/images/drawer.jpg"),
-                    fit: BoxFit.fill)),
+                    image: AssetImage("assets/images/fac.jpg"),
+                    fit: BoxFit.cover)),
           ),
-          ListTile(
-            leading: Icon(Icons.input),
-            title: Text('Welcome'),
-            onTap: () => {},
+          Container(
+            color: Colors.blueGrey,
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.verified_user),
+                  title: Text('Profile'),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Profilepage())),
+                ),
+                ListTile(
+                  leading: Icon(Icons.verified_user),
+                  title: Text('Profile'),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Profilepage())),
+                ),
+                ListTile(
+                  leading: Icon(Icons.verified_user),
+                  title: Text('Profile'),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Profilepage())),
+                ),
+              ],
+            ),
           ),
           ListTile(
             leading: Icon(Icons.verified_user),
@@ -252,8 +380,8 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.notifications),
             title: Text('Notifications'),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Notificationa())),
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Reqsp())),
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),

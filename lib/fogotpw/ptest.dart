@@ -40,9 +40,7 @@ class _SigninppState extends State<SignppIn> {
           _isLoading = false;
         });
         //sharedPreferences.setString("token", jsonResponse['token']);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (BuildContext context) => Menu()),
-            (Route<dynamic> route) => false);
+
       }
     } else {
       setState(() {

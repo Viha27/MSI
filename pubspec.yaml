@@ -41,6 +41,7 @@ dependencies:
   sign_button: ^1.0.2
   retrofit: any
   json_annotation: any
+  flutter_slider_drawer: ^1.2.1
 
 
 dev_dependencies:

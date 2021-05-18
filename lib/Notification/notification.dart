@@ -4,20 +4,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:postgrad/Attendance/Attendance.dart';
-import 'package:postgrad/Exam_Results/ExamResults.dart';
-import 'package:postgrad/services/teacher_service.dart';
-import 'package:postgrad/services/token_service.dart';
+import 'Model.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:date_time_format/date_time_format.dart';
 
-import 'helloworld.dart';
+class Reqsp extends StatefulWidget {
+  const Reqsp({Key key}) : super(key: key);
 
-class Notificationa extends StatefulWidget {
-  _NotificationaState createState() => _NotificationaState();
+  _ReqspState createState() => _ReqspState();
 }
 
-class _NotificationaState extends State<Notificationa> {
+class _ReqspState extends State<Reqsp> {
   getStringValuesSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
@@ -26,38 +23,31 @@ class _NotificationaState extends State<Notificationa> {
     return stringValue;
   }
 
-  List courseModules = [];
+  Notifi names;
   bool isLoading = false;
   @override
   void initState() {
     super.initState();
-    this.fetchModule();
   }
 
-  fetchModule() async {
-    setState(() {
-      isLoading = true;
+  Future<Notifi> fetchModule() async {
+    // setState(() {
+    //   isLoading = true;
+    // });
+    var url = "http://10.0.2.2:3000/api/get-notifications";
+    var token = await getStringValuesSF();
+    final response = await http.post(url, headers: {
+      'authentication': 'Bearer $token',
     });
-    var url = "http://10.0.2.2:2000/Notifications";
-    //var token = await getStringValuesSF();
-    var response = await http.get(url);
     //print(response.body);
     if (response.statusCode == 200) {
-      var items = json.decode(response.body)['Notifications'];
-      //var times = json.decode(response.body)['lectureHours'];
-      print(items);
-      setState(() {
-        courseModules = items;
-        isLoading = false;
-      });
-      print(response);
+      final jsonresponse = json.decode(response.body);
+      Notifi items = new Notifi.fromJson(jsonresponse);
+      print('${items.status}');
+
+      return items;
     } else {
-      print(response.statusCode);
-      setState(() {
-        courseModules = [];
-        isLoading = false;
-        print("Error");
-      });
+      return null;
     }
   }
 
@@ -75,73 +65,97 @@ class _NotificationaState extends State<Notificationa> {
           ),
         ),
         //body: getBody(),
-        body: getBody());
-  }
-
-  Widget getBody() {
-    return ListView.builder(
-        itemCount: courseModules.length,
-        itemBuilder: (context, index) {
-          return getCard(courseModules[index]);
-        });
-  }
-
-  Widget getCard(index) {
-    var subject = index['Subject'].toString();
-    //var description = index['moduleName'];
-    var message = index['Message'];
-    var id = index['id'].toString();
-    var comlete = index['complete'];
-    //var lecturehall = index['LectureHall'];
-    var color1;
-
-    if (comlete == true) {
-      color1 = Colors.redAccent;
-    } else {
-      color1 = Colors.greenAccent[700];
-    }
-
-    return SingleChildScrollView(
-      child: Center(
-          child: Container(
-        width: 400,
-        height: 200,
-        padding: new EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            color: color1,
-            elevation: 10,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Icon(Icons.album, size: 60),
-                Text(subject,
-                    style:
-                        TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold)),
-                Text(message, style: TextStyle(fontSize: 18.0)),
-                ButtonBar(
-                  children: <Widget>[
-                    RaisedButton(
-                      child: const Text('Remember Me'),
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Helloworld())),
-                    ),
-                    RaisedButton(
-                      child: const Text('Done'),
-                      onPressed: () {/* ... */},
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      )),
-    );
+        body: FutureBuilder<Notifi>(
+          future: fetchModule(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              // Show Loading indicator
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              );
+            } else {
+              // Show data if exist
+              return Column(
+                children: snapshot.data.notifications
+                    .map(
+                      (req) => Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          shadowColor: Colors.brown,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 5.0),
+                          child: ListTile(
+                              title: Column(children: [
+                            Row(
+                              children: [
+                                Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: Colors.pinkAccent,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    child: Text('')),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                SizedBox(
+                                  width: 250,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Text(
+                                        req.sentBy,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                          ]))),
+                    )
+                    .toList(),
+              );
+              /* 
+               return ListView(
+                children: snapshot.data.requests[0].requestTypes
+                    .map(
+                      (req) => ListTile(
+                        leading: Text("${req.requestId}"),
+                        title: Text(req.request),
+                      ),
+                    )
+                    .toList(),
+              ); */
+            }
+          },
+        ));
   }
 }

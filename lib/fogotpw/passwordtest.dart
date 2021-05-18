@@ -25,164 +25,226 @@ class SignpIn extends StatefulWidget {
 }
 
 class _SigninpState extends State<SignpIn> {
-  TextEditingController _userNameController = TextEditingController();
+  Future<Message> _futureAlbum;
+  TextEditingController _controller = TextEditingController();
   bool _isLoading = false;
-  Future<Message> signIn(String username) async {
+  Future<Message> createAlbum(String title) async {
     String url = "http://10.0.2.2:3000/api/send-password-reset-email";
-    Map body = {"username": username};
-    var jsonResponse;
+    Map body = {"username": title};
+
     var res = await http.post(url, body: body);
+
     if (res.statusCode == 200) {
-      jsonResponse = json.decode(res.body);
+      print("Response Status ${res.statusCode}");
+      print("Response Status ${res.body}");
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      return Message.fromJson(jsonDecode(res.body));
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
       print("Response Status ${res.statusCode}");
       print("Response Status ${res.body}");
 
-      if (jsonResponse != null) {
-        setState(() {
-          _isLoading = false;
-        });
-        //sharedPreferences.setString("token", jsonResponse['token']);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (BuildContext context) => Menu()),
-            (Route<dynamic> route) => false);
-      }
-    } else {
-      setState(() {
-        _isLoading = false;
-      });
-
-      print("Response Status: ${res.body}");
+      return Message.fromJson(jsonDecode(res.body));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Fogot Password?",
+            style: TextStyle(color: Colors.brown),
+          ),
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.brown, //change your color here
+          ),
+        ),
         body: Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
-            ),
-            shadowColor: Colors.brown,
-            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
-            child: ListTile(
-              title: Column(
-                children: [
-                  Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                shadowColor: Colors.brown,
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+                child: ListTile(
+                  title: Column(
                     children: [
-                      Container(
-                        width: 60,
-                        height: 55,
-                        decoration: BoxDecoration(
-                          color: Colors.pinkAccent,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: Icon(
-                          Icons.quick_contacts_mail_rounded,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 250,
-                        child: Column(
-                          children: [
-                            Text(
-                              'Forgot Password',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Container(
+                            width: 60,
+                            height: 55,
+                            decoration: BoxDecoration(
+                              color: Colors.pinkAccent,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
-                            SizedBox(
-                              height: 20,
+                            child: Icon(
+                              Icons.quick_contacts_mail_rounded,
+                              size: 50,
+                              color: Colors.white,
                             ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 350,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'We will send you an email to your recovery email with instructions to reset your password. Please enter your username below.',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: TextField(
-                                controller: _userNameController,
-                                decoration: InputDecoration(
-                                    hintText: "Username",
-                                    border: new OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(10.0),
-                                      ),
-                                    ),
-                                    filled: true,
-                                    hintStyle:
-                                        new TextStyle(color: Colors.grey[800]),
-                                    fillColor: Colors.white70),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
+                          ),
+                          SizedBox(
+                            width: 250,
+                            child: Column(
                               children: [
-                                SizedBox(
-                                  width: 250,
+                                Text(
+                                  'Forgot Password',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  color: Colors.blue,
-                                  onPressed: () {
-                                    setState(() {
-                                      _isLoading = true;
-                                    });
-                                    signIn(_userNameController.text);
-                                  },
-                                  child: Text(
-                                    "Send",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
+                                SizedBox(
+                                  height: 20,
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        ),
+                          )
+                        ],
                       ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 350,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'We will send you an email to your recovery email with instructions to reset your password. Please enter your username below.',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '      USERNAME :',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.brown),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 4),
+                                    Container(
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.4),
+                                            spreadRadius: 5,
+                                            blurRadius: 7,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextField(
+                                        controller: _controller,
+                                        decoration: InputDecoration(
+                                            hintText: "EX : 184078M",
+                                            border: new OutlineInputBorder(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                const Radius.circular(10.0),
+                                              ),
+                                            ),
+                                            filled: true,
+                                            hintStyle: new TextStyle(
+                                                color: Colors.grey[800]),
+                                            fillColor: Colors.white70),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: (_futureAlbum == null)
+                                      ? null
+                                      : buildFutureBuilder(),
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 250,
+                                    ),
+                                    RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        setState(() {
+                                          _futureAlbum =
+                                              createAlbum(_controller.text);
+                                        });
+                                      },
+                                      child: Text(
+                                        "Send",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
+  }
+
+  FutureBuilder<Message> buildFutureBuilder() {
+    return FutureBuilder<Message>(
+      future: _futureAlbum,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(
+            snapshot.data.message,
+            style:
+                TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return CircularProgressIndicator();
+      },
+    );
   }
 }

@@ -9,6 +9,7 @@ import 'package:postgrad/Requests%20and%20Inquiries/Requests1.dart';
 import 'package:postgrad/SignUp/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:postgrad/fogotpw/error.dart';
 import 'package:postgrad/fogotpw/passwordReset.dart';
 import 'package:postgrad/fogotpw/passwordtest.dart';
 import 'package:postgrad/fogotpw/ptest.dart';
@@ -62,7 +63,7 @@ class _SigninState extends State<SignIn> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.fromLTRB(20, 100, 20, 20),
+          padding: EdgeInsets.fromLTRB(50, 100, 50, 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,45 +84,90 @@ class _SigninState extends State<SignIn> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: TextField(
-                  controller: _userNameController,
-                  decoration: InputDecoration(
-                      hintText: "Username",
-                      border: new OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(
-                          const Radius.circular(10.0),
-                        ),
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        ' USERNAME :',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.brown),
                       ),
-                      filled: true,
-                      hintStyle: new TextStyle(color: Colors.grey[800]),
-                      fillColor: Colors.white70),
-                ),
+                    ],
+                  ),
+                  SizedBox(height: 4),
+                  Container(
+                    width: 300,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.4),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: _userNameController,
+                      decoration: InputDecoration(
+                          hintText: "EX : 184078M",
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(10.0),
+                            ),
+                          ),
+                          filled: true,
+                          hintStyle: new TextStyle(color: Colors.grey[800]),
+                          fillColor: Colors.white70),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 10,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: TextField(
-                  obscureText: true,
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                      hintText: "Password",
-                      border: new OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(
-                          const Radius.circular(10.0),
-                        ),
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        ' PASSWORD :',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.brown),
                       ),
-                      filled: true,
-                      hintStyle: new TextStyle(color: Colors.grey[800]),
-                      fillColor: Colors.white70),
-                ),
+                    ],
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.4),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      obscureText: true,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                          hintText: "Password",
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(10.0),
+                            ),
+                          ),
+                          filled: true,
+                          hintStyle: new TextStyle(color: Colors.grey[800]),
+                          fillColor: Colors.white70),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 10,
@@ -133,13 +179,28 @@ class _SigninState extends State<SignIn> {
                   //TODO FORGOT PASSWORD SCREEN GOES HERE
                 },
                 child: Text(
-                  'Forgot Password ?',
-                  style: TextStyle(color: Colors.blue, fontSize: 15),
+                  'FOGOT PASSWORD ?',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               Container(
                 height: 50,
-                width: 200,
+                width: 160,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue, width: 5),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
                 child: RaisedButton(
                   hoverColor: Colors.blue,
                   color: Colors.blue,
