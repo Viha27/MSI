@@ -29,7 +29,8 @@ class _SigninState extends State<SignIn> {
   TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
   signIn(String username, String password) async {
-    String url = "http://10.0.2.2:3000/api/login";
+    String url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/auth/login";
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map body = {"username": username, "password": password};
     var jsonResponse;
@@ -43,7 +44,7 @@ class _SigninState extends State<SignIn> {
         setState(() {
           _isLoading = false;
         });
-        //sharedPreferences.setString("token", jsonResponse['token']);
+        sharedPreferences.setString("token", jsonResponse['token']);
         sharedPreferences.setString("username", jsonResponse['username']);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => Menu()),

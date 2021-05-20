@@ -5,7 +5,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad/Menu/model.dart';
+import 'package:postgrad/Notification/Model.dart';
+import 'package:postgrad/Notification/notification.dart';
 import 'package:postgrad/Requests%20and%20Inquiries/Model.dart';
+import 'package:postgrad/SignUp/SignIn.dart';
+import 'package:postgrad/Time_Table/Time_Table.dart';
 import 'package:postgrad/profile/profile.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,7 +40,8 @@ class _ReqsState extends State<Draver> {
     // setState(() {
     //   isLoading = true;
     // });
-    var url = "http://10.0.2.2:3000/api/get-user-details";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-user-details";
     var token = await getStringValuesSF();
     final response = await http.post(url, headers: {
       'authentication': 'Bearer $token',
@@ -60,7 +65,13 @@ class _ReqsState extends State<Draver> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             // Show Loading indicator
-            return CircularProgressIndicator();
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+              ],
+            );
           } else {
             // Show data if exist
             return Container(
@@ -105,7 +116,7 @@ class _ReqsState extends State<Draver> {
                           ListTile(
                             tileColor: Colors.purple,
                             leading: Icon(
-                              Icons.verified_user,
+                              Icons.verified_user_outlined,
                               color: Colors.white,
                             ),
                             title: Text(
@@ -127,13 +138,13 @@ class _ReqsState extends State<Draver> {
                               color: Colors.white,
                             ),
                             title: Text(
-                              'Notification',
+                              'Messages',
                               style: TextStyle(color: Colors.white),
                             ),
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Profilepage())),
+                                    builder: (context) => Notifications())),
                           ),
                           SizedBox(
                             height: 5,
@@ -151,7 +162,7 @@ class _ReqsState extends State<Draver> {
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Profilepage())),
+                                    builder: (context) => Timetable())),
                           ),
                         ],
                       ),
@@ -169,10 +180,8 @@ class _ReqsState extends State<Draver> {
                         'Logout',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Profilepage())),
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignIn())),
                     ),
                   ],
                 ),

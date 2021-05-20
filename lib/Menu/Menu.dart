@@ -53,7 +53,8 @@ class _MenuState extends State<Menu> {
     // setState(() {
     //   isLoading = true;
     // });
-    var url = "http://10.0.2.2:3000/api/get-requests";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-requests";
     var token = await getStringValuesSF();
     final response = await http.post(url, headers: {
       'authentication': 'Bearer $token',
@@ -81,7 +82,7 @@ class _MenuState extends State<Menu> {
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.brown),
           title: Text(
-            'Main Menu',
+            '@ FIT, UOM',
             style: TextStyle(color: Colors.brown),
           ),
           actions: <Widget>[
@@ -90,8 +91,8 @@ class _MenuState extends State<Menu> {
                 Icons.notifications_active,
                 color: Colors.brown,
               ),
-              onPressed: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Reqsp())),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Notifications())),
               // do something
             )
           ],
@@ -307,10 +308,8 @@ class _MenuState extends State<Menu> {
                           borderRadius: BorderRadius.circular(10)),
                       child: FlatButton(
                         color: Colors.blueAccent,
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Payments())),
+                        onPressed: () => Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Pays())),
                         child: Text(
                           "Payments",
                           style: TextStyle(
@@ -392,113 +391,6 @@ class _MenuState extends State<Menu> {
               title: Text('Logout'),
               activeColor: Colors.purple,
               textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class NavDrawer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var email = getStringValuesSF();
-    return Container(
-      color: Colors.amberAccent,
-      child: Drawer(
-        child: ListView(
-          padding: EdgeInsets.all(10),
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text(
-                email,
-                style: TextStyle(fontSize: 18),
-              ),
-              accountEmail: Text('aleydon@gmail.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: ExactAssetImage('assets/images/stu.png'),
-              ),
-              onDetailsPressed: () {},
-              decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.7),
-
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                  border: Border.all(color: Colors.blueAccent, width: 10),
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  ListTile(
-                    tileColor: Colors.purple,
-                    leading: Icon(
-                      Icons.verified_user,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      'Profile',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profilepage())),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  ListTile(
-                    tileColor: Colors.purple,
-                    leading: Icon(
-                      Icons.notifications_active_outlined,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      'Notification',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profilepage())),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  ListTile(
-                    tileColor: Colors.purple,
-                    leading: Icon(
-                      Icons.timer,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      'Time table',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profilepage())),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            ListTile(
-              tileColor: Colors.purple,
-              leading: Icon(
-                Icons.exit_to_app_outlined,
-                color: Colors.white,
-              ),
-              title: Text(
-                'Logout',
-                style: TextStyle(color: Colors.white),
-              ),
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Profilepage())),
             ),
           ],
         ),

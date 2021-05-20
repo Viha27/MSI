@@ -35,7 +35,8 @@ class _ReqsState extends State<Reqs> {
     // setState(() {
     //   isLoading = true;
     // });
-    var url = "http://10.0.2.2:3000/api/get-requests";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-requests";
     var token = await getStringValuesSF();
     final response = await http.post(url, headers: {
       'authentication': 'Bearer $token',
@@ -57,7 +58,7 @@ class _ReqsState extends State<Reqs> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Requests and Incuaries",
+            "Requests",
             style: TextStyle(color: Colors.brown),
           ),
           backgroundColor: Colors.white,
@@ -71,75 +72,70 @@ class _ReqsState extends State<Reqs> {
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               // Show Loading indicator
-              return CircularProgressIndicator();
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              );
             } else {
               // Show data if exist
               return Column(
-                children:
-                    snapshot.data.requests[(widget.index) - 1].requestTypes
-                        .map((req) => SingleChildScrollView(
-                              child: Container(
-                                padding: EdgeInsets.all(16),
-                                margin: EdgeInsets.fromLTRB(1, 3, 16, 3),
-                                decoration: BoxDecoration(
-                                    color: Colors.deepPurple,
-                                    borderRadius: BorderRadius.horizontal(
-                                      right: Radius.circular(16),
-                                    )),
-                                child: Column(
-                                  children: <Widget>[
-                                    Wrap(
+                children: snapshot.data
+                    .requests[snapshot.data.requests.length - 1].requestTypes
+                    .map((req) => SingleChildScrollView(
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            margin: EdgeInsets.fromLTRB(1, 3, 16, 3),
+                            decoration: BoxDecoration(
+                                color: Colors.deepPurple,
+                                borderRadius: BorderRadius.horizontal(
+                                  right: Radius.circular(16),
+                                )),
+                            child: Column(
+                              children: <Widget>[
+                                Wrap(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                              height: 10,
-                                              width: 10,
-                                              decoration: BoxDecoration(
-                                                color: Colors.green,
-                                                shape: BoxShape.circle,
-                                              ),
+                                        Container(
+                                          height: 10,
+                                          width: 10,
+                                          decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Container(
+                                          child: Expanded(
+                                            child: Text(
+                                              req.request,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .title
+                                                  .copyWith(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                  ),
                                             ),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            Container(
-                                              child: Expanded(
-                                                child: Text(
-                                                  req.request,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .title
-                                                      .copyWith(
-                                                        color: Colors.white,
-                                                        fontSize: 18,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
-                              ),
-                            ))
-                        .toList(),
-              );
-              /* 
-               return ListView(
-                children: snapshot.data.requests[0].requestTypes
-                    .map(
-                      (req) => ListTile(
-                        leading: Text("${req.requestId}"),
-                        title: Text(req.request),
-                      ),
-                    )
+                              ],
+                            ),
+                          ),
+                        ))
                     .toList(),
-              ); */
+              );
             }
           },
         ));

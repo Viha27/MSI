@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final users = usersFromJson(jsonString);
+
 import 'dart:convert';
 
 Users usersFromJson(String str) => Users.fromJson(json.decode(str));
@@ -43,10 +47,10 @@ class Request {
   int requestId;
   DateTime date;
   String remarks;
-  dynamic finalDecision;
+  int finalDecision;
   List<RequestType> requestTypes;
   List<Reason> reasons;
-  List<dynamic> reviewedBy;
+  List<ReviewedBy> reviewedBy;
 
   factory Request.fromJson(Map<String, dynamic> json) => Request(
         requestId: json["requestID"],
@@ -57,7 +61,8 @@ class Request {
             json["requestTypes"].map((x) => RequestType.fromJson(x))),
         reasons:
             List<Reason>.from(json["reasons"].map((x) => Reason.fromJson(x))),
-        reviewedBy: List<dynamic>.from(json["reviewedBy"].map((x) => x)),
+        reviewedBy: List<ReviewedBy>.from(
+            json["reviewedBy"].map((x) => ReviewedBy.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -67,7 +72,7 @@ class Request {
         "finalDecision": finalDecision,
         "requestTypes": List<dynamic>.from(requestTypes.map((x) => x.toJson())),
         "reasons": List<dynamic>.from(reasons.map((x) => x.toJson())),
-        "reviewedBy": List<dynamic>.from(reviewedBy.map((x) => x)),
+        "reviewedBy": List<dynamic>.from(reviewedBy.map((x) => x.toJson())),
       };
 }
 
@@ -108,5 +113,33 @@ class RequestType {
   Map<String, dynamic> toJson() => {
         "requestID": requestId,
         "request": request,
+      };
+}
+
+class ReviewedBy {
+  ReviewedBy({
+    this.requestId,
+    this.status,
+    this.reason,
+    this.reviewer,
+  });
+
+  int requestId;
+  int status;
+  String reason;
+  String reviewer;
+
+  factory ReviewedBy.fromJson(Map<String, dynamic> json) => ReviewedBy(
+        requestId: json["requestID"],
+        status: json["status"],
+        reason: json["reason"],
+        reviewer: json["reviewer"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "requestID": requestId,
+        "status": status,
+        "reason": reason,
+        "reviewer": reviewer,
       };
 }

@@ -35,7 +35,8 @@ class _CourseModuleState extends State<CourseModules> {
     setState(() {
       isLoading = true;
     });
-    var url = "http://10.0.2.2:3000/api/get-modules";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-modules";
     var token = await getStringValuesSF();
     var response = await http.post(url, headers: {
       'authentication': 'Bearer $token',
@@ -195,7 +196,7 @@ class _CourseModuleState extends State<CourseModules> {
                             onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ExamResults())),
+                                    builder: (context) => Attendance())),
                             child: Text(
                               "Check Attendance",
                               style: TextStyle(

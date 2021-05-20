@@ -46,7 +46,8 @@ class _ReqsState extends State<Sunday> {
     // });
     var uname = await getStringValuesSFN();
 
-    var url = "http://10.0.2.2:3000/api//get-timetable/$uname/3";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api//get-timetable/$uname/3";
 
     var token = await getStringValuesSF();
     final response = await http.get(url, headers: {
@@ -83,7 +84,13 @@ class _ReqsState extends State<Sunday> {
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               // Show Loading indicator
-              return CircularProgressIndicator();
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              );
             } else {
               // Show data if exist
               return Column(

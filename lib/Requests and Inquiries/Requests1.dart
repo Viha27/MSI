@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:postgrad/Attendance/Attendance.dart';
 import 'package:postgrad/Exam_Results/ExamResults.dart';
 import 'package:postgrad/Requests%20and%20Inquiries/Requests.dart';
+import 'package:postgrad/Requests%20and%20Inquiries/ReviewBy.dart';
 import 'package:postgrad/Requests%20and%20Inquiries/Reviewed.dart';
 import 'package:postgrad/services/teacher_service.dart';
 import 'package:postgrad/services/token_service.dart';
@@ -40,7 +41,8 @@ class _ReqState extends State<Req> {
     setState(() {
       isLoading = true;
     });
-    var url = "http://10.0.2.2:3000/api/get-requests";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-requests";
     var token = await getStringValuesSF();
     var response = await http.post(url, headers: {
       'authentication': 'Bearer $token',
@@ -92,13 +94,27 @@ class _ReqState extends State<Req> {
 
   Widget getCard(index) {
     var reqId = index['requestID'];
+    var dec;
+    var dect;
 
     var date = DateTime.parse(index['date']);
     var remark = index['remarks'];
     var decision = index['finalDecision'];
 
-    if (decision == null) {
-      decision = "pending";
+    if (decision == 2) {
+      dec = "pending";
+    } else if (decision == 1) {
+      dec = "Approved";
+    } else {
+      dec = "Not Approved";
+    }
+
+    if (decision == 2) {
+      dect = Colors.purple;
+    } else if (decision == 1) {
+      dect = Colors.green;
+    } else {
+      dect = Colors.redAccent;
     }
 
     //var description = index['description'];
@@ -118,7 +134,7 @@ class _ReqState extends State<Req> {
                 width: 55,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.pinkAccent,
+                  color: Colors.purple,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 child: Icon(
@@ -171,12 +187,12 @@ class _ReqState extends State<Req> {
                       height: 3,
                     ),
                     Text(
-                      'Decision: ' + decision.toString(),
+                      'Decision: ' + dec,
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          color: Colors.black,
+                          color: dect,
                           fontSize: 17,
-                          fontWeight: FontWeight.normal),
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -189,7 +205,7 @@ class _ReqState extends State<Req> {
           SizedBox(
             height: 20,
           ),
-          Row(
+          /* Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               RaisedButton(
@@ -212,8 +228,25 @@ class _ReqState extends State<Req> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(
-                width: 40,
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                color: Colors.blue,
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Review(
+                              index: reqId,
+                            ))),
+                child: Text(
+                  "Reasons",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
               RaisedButton(
                 shape: RoundedRectangleBorder(
@@ -223,7 +256,7 @@ class _ReqState extends State<Req> {
                 onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Review(index: reqId))),
+                        builder: (context) => RevBy(index: reqId))),
                 child: Text(
                   "Reviewed By",
                   style: TextStyle(
@@ -234,7 +267,7 @@ class _ReqState extends State<Req> {
                 ),
               ),
             ],
-          )
+          ) */
         ])));
   }
 }

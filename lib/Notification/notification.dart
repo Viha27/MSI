@@ -9,13 +9,13 @@ import 'Model.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Reqsp extends StatefulWidget {
-  const Reqsp({Key key}) : super(key: key);
+class Notifications extends StatefulWidget {
+  const Notifications({Key key}) : super(key: key);
 
   _ReqspState createState() => _ReqspState();
 }
 
-class _ReqspState extends State<Reqsp> {
+class _ReqspState extends State<Notifications> {
   getStringValuesSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
@@ -35,7 +35,8 @@ class _ReqspState extends State<Reqsp> {
     // setState(() {
     //   isLoading = true;
     // });
-    var url = "http://10.0.2.2:3000/api/get-notifications";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-notifications";
     var token = await getStringValuesSF();
     final response = await http.post(url, headers: {
       'authentication': 'Bearer $token',
@@ -75,7 +76,13 @@ class _ReqspState extends State<Reqsp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                    ],
+                  )
                 ],
               );
             } else {
@@ -151,7 +158,7 @@ class _ReqspState extends State<Reqsp> {
                                     ),
                                     SizedBox(width: 5),
                                     Text(
-                                      'From : ' + req.sentBy,
+                                      'From : ' + req.sender,
                                       style: Theme.of(context)
                                           .textTheme
                                           .subtitle

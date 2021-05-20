@@ -135,8 +135,8 @@ class SchedulesContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Postgraduate Devision',
-                  style: Theme.of(context).textTheme.display1,
+                  'Postgraduate Devision Faculty of IT',
+                  style: TextStyle(fontSize: 20, color: Colors.blueAccent),
                 ),
                 Text(
                   '',
@@ -159,27 +159,20 @@ class Schedules extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          Schedule(
-            name: 'First meeting about app',
-            time: '10:30 am - 11:30 am',
-            dotColor: Colors.green,
-            active: true,
-          ),
-          Schedule(
-            name: 'Send documents to an accountant',
-            time: '05:00 pm - send report',
-            dotColor: Colors.green,
-            active: false,
-          ),
-          Schedule(
-            name: 'Meeting with investor',
-            time: '05:00 pm - 07:30 pm',
-            dotColor: Colors.orange,
-            active: false,
-          ),
-        ],
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.4),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          border: Border.all(color: Colors.blueAccent, width: 10),
+          borderRadius: BorderRadius.circular(10)),
+      child: Image.asset(
+        'assets/images/fac.jpg',
+        width: 300,
       ),
     );
   }

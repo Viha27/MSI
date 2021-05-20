@@ -1,15 +1,16 @@
 // To parse this JSON data, do
 //
-//     final student = studentFromJson(jsonString);
+//     final studetails = studetailsFromJson(jsonString);
 
 import 'dart:convert';
 
-Student studentFromJson(String str) => Student.fromJson(json.decode(str));
+Studetails studetailsFromJson(String str) =>
+    Studetails.fromJson(json.decode(str));
 
-String studentToJson(Student data) => json.encode(data.toJson());
+String studetailsToJson(Studetails data) => json.encode(data.toJson());
 
-class Student {
-  Student({
+class Studetails {
+  Studetails({
     this.status,
     this.details,
     this.educationQualifications,
@@ -19,7 +20,7 @@ class Student {
   Details details;
   List<EducationQualification> educationQualifications;
 
-  factory Student.fromJson(Map<String, dynamic> json) => Student(
+  factory Studetails.fromJson(Map<String, dynamic> json) => Studetails(
         status: json["status"],
         details: Details.fromJson(json["details"]),
         educationQualifications: List<EducationQualification>.from(
@@ -72,7 +73,7 @@ class Details {
   String designation;
   String company;
   int academicYear;
-  double currentGpa;
+  dynamic currentGpa;
 
   factory Details.fromJson(Map<String, dynamic> json) => Details(
         username: json["username"],
@@ -91,7 +92,7 @@ class Details {
         designation: json["designation"],
         company: json["company"],
         academicYear: json["academicYear"],
-        currentGpa: json["currentGPA"].toDouble(),
+        currentGpa: json["currentGPA"],
       );
 
   Map<String, dynamic> toJson() => {

@@ -45,7 +45,8 @@ class _AttendanceState extends State<Attendance> {
     setState(() {
       isLoading = true;
     });
-    var url = "http://10.0.2.2:3000/api/get-attendance";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-attendance";
     var token = await getStringValuesSF();
     var response = await http.post(url, headers: {
       'authentication': 'Bearer $token',

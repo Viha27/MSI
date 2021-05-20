@@ -35,7 +35,8 @@ class _ExamResultsState extends State<ExamResults> {
     setState(() {
       isLoading = true;
     });
-    var url = "http://10.0.2.2:3000/api/get-results";
+    var url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-results";
     var token = await getStringValuesSF();
     var response = await http.post(url, headers: {
       'authentication': 'Bearer $token',
@@ -103,10 +104,10 @@ class _ExamResultsState extends State<ExamResults> {
               Row(
                 children: [
                   Container(
-                    width: 65,
-                    height: 60,
+                    width: 60,
+                    height: 50,
                     decoration: BoxDecoration(
-                      color: Colors.indigoAccent,
+                      color: Colors.purple,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     child: Icon(

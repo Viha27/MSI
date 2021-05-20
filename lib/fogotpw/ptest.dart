@@ -26,7 +26,8 @@ class _SigninppState extends State<SignppIn> {
   TextEditingController _passwordresetController = TextEditingController();
   bool _isLoading = false;
   signIn(String username) async {
-    String url = "http://10.0.2.2:3000/api/send-password-reset-email";
+    String url =
+        "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/send-password-reset-email";
     Map body = {"username": username};
     var jsonResponse;
     var res = await http.post(url, body: body);

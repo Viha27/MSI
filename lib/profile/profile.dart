@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:postgrad/Menu/educationquli.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profilepage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _MyAppState extends State<Profilepage> {
                 onPressed: () => Navigator.of(context).pop(),
               ),
               title: Text(
-                "My profile",
+                "My Profile",
                 style: TextStyle(color: Colors.brown),
               ),
               backgroundColor: Colors.white,
@@ -333,6 +334,7 @@ class _MyAppState extends State<Profilepage> {
                                           ),
                                     ],
                                   )),
+                              _getActionButtons(),
                             ],
                           ),
                         ),
@@ -363,32 +365,15 @@ class _MyAppState extends State<Profilepage> {
               padding: EdgeInsets.only(right: 10.0),
               child: Container(
                   child: new RaisedButton(
-                child: new Text("Save"),
+                child: new Text("Education Quilifications"),
                 textColor: Colors.white,
-                color: Colors.green,
+                color: Colors.blueAccent,
                 onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Ed()));
+
                   setState(() {
                     //               _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                  });
-                },
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
-              )),
-            ),
-            flex: 2,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Container(
-                  child: new RaisedButton(
-                child: new Text("Cancel"),
-                textColor: Colors.white,
-                color: Colors.red,
-                onPressed: () {
-                  setState(() {
-                    //                 _status = true;
                     FocusScope.of(context).requestFocus(new FocusNode());
                   });
                 },
@@ -424,7 +409,8 @@ class _MyAppState extends State<Profilepage> {
 }
 
 Future<Response> fetchAlbum() async {
-  var url = "http://10.0.2.2:3000/api/get-user-details";
+  var url =
+      "http://ec2-13-233-98-120.ap-south-1.compute.amazonaws.com:3000/api/get-user-details";
   var token = await getStringValuesSF();
   final response = await http.post(url, headers: {
     'authentication': 'Bearer $token',
