@@ -13,7 +13,7 @@ class DateBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = active ? Colors.deepPurple[500] : Colors.grey[300];
+    Color backgroundColor = active ? Colors.purple : Colors.grey[300];
     Color color =
         active ? Colors.white : Theme.of(context).textTheme.display1.color;
 

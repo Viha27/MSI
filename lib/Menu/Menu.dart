@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:postgrad/Attendance/Attendance.dart';
+import 'package:postgrad/Menu/configuration.dart';
 import 'package:postgrad/Notification/notification.dart';
 import 'package:postgrad/Course%20Modules/CourseModules.dart';
 import 'package:postgrad/Exam_Results/ExamResults.dart';
@@ -76,7 +77,7 @@ class _MenuState extends State<Menu> {
     return MaterialApp(
       title: title,
       home: Scaffold(
-        drawer: NavDrawer(),
+        drawer: Draver(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.brown),
           title: Text(
@@ -402,6 +403,7 @@ class _MenuState extends State<Menu> {
 class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var email = getStringValuesSF();
     return Container(
       color: Colors.amberAccent,
       child: Drawer(
@@ -410,7 +412,7 @@ class NavDrawer extends StatelessWidget {
           children: <Widget>[
             UserAccountsDrawerHeader(
               accountName: Text(
-                'Roberto Aleydon',
+                email,
                 style: TextStyle(fontSize: 18),
               ),
               accountEmail: Text('aleydon@gmail.com'),
