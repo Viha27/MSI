@@ -75,69 +75,59 @@ class _ReqsState extends State<Reqs> {
             } else {
               // Show data if exist
               return Column(
-                children: snapshot
-                    .data.requests[(widget.index) - 1].requestTypes
-                    .map(
-                      (req) => Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          shadowColor: Colors.brown,
-                          margin: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 5.0),
-                          child: ListTile(
-                              title: Column(children: [
-                            Row(
-                              children: [
-                                Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: Colors.pinkAccent,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                children:
+                    snapshot.data.requests[(widget.index) - 1].requestTypes
+                        .map((req) => SingleChildScrollView(
+                              child: Container(
+                                padding: EdgeInsets.all(16),
+                                margin: EdgeInsets.fromLTRB(1, 3, 16, 3),
+                                decoration: BoxDecoration(
+                                    color: Colors.deepPurple,
+                                    borderRadius: BorderRadius.horizontal(
+                                      right: Radius.circular(16),
+                                    )),
+                                child: Column(
+                                  children: <Widget>[
+                                    Wrap(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              height: 10,
+                                              width: 10,
+                                              decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Container(
+                                              child: Expanded(
+                                                child: Text(
+                                                  req.request,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .title
+                                                      .copyWith(
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    child: Text('')),
-                                SizedBox(
-                                  width: 20,
+                                  ],
                                 ),
-                                SizedBox(
-                                  width: 250,
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      Text(
-                                        req.request,
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      SizedBox(
-                                        height: 3,
-                                      ),
-                                      SizedBox(
-                                        height: 3,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ]))),
-                    )
-                    .toList(),
+                              ),
+                            ))
+                        .toList(),
               );
               /* 
                return ListView(

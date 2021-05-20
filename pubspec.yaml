@@ -42,6 +42,8 @@ dependencies:
   retrofit: any
   json_annotation: any
   flutter_slider_drawer: ^1.2.1
+  bottom_navy_bar: ^5.5.0
+  font_awesome_flutter: any
 
 
 dev_dependencies:
@@ -49,6 +51,7 @@ dev_dependencies:
     sdk: flutter
   retrofit_generator: any
   build_runner: any  
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

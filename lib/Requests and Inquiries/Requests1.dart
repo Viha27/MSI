@@ -115,15 +115,15 @@ class _ReqState extends State<Req> {
           Row(
             children: [
               Container(
-                width: 65,
-                height: 60,
+                width: 55,
+                height: 50,
                 decoration: BoxDecoration(
                   color: Colors.pinkAccent,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 child: Icon(
-                  Icons.announcement_rounded,
-                  size: 50,
+                  Icons.request_page_outlined,
+                  size: 40,
                   color: Colors.white,
                 ),
               ),
@@ -133,6 +133,8 @@ class _ReqState extends State<Req> {
               SizedBox(
                 width: 250,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Request No : " + reqId.toString(),
@@ -151,7 +153,7 @@ class _ReqState extends State<Req> {
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 17,
                       ),
                     ),
                     SizedBox(
@@ -162,7 +164,7 @@ class _ReqState extends State<Req> {
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 17,
                       ),
                     ),
                     SizedBox(
@@ -173,7 +175,7 @@ class _ReqState extends State<Req> {
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: 17,
                           fontWeight: FontWeight.normal),
                     ),
                   ],
@@ -219,7 +221,9 @@ class _ReqState extends State<Req> {
                 ),
                 color: Colors.blue,
                 onPressed: () => Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Res())),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Review(index: reqId))),
                 child: Text(
                   "Reviewed By",
                   style: TextStyle(

@@ -5,15 +5,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad/Requests%20and%20Inquiries/Model.dart';
-import 'package:postgrad/Requests%20and%20Inquiries/Requests1.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Res extends StatefulWidget {
-  _ResState createState() => _ResState();
+class Review extends StatefulWidget {
+  final int index;
+  const Review({Key key, this.index}) : super(key: key);
+
+  _ReqsState createState() => _ReqsState();
 }
 
-class _ResState extends State<Res> {
+class _ReqsState extends State<Review> {
   getStringValuesSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
@@ -72,16 +74,71 @@ class _ResState extends State<Res> {
               return CircularProgressIndicator();
             } else {
               // Show data if exist
-              return ListView(
-                children: snapshot.data.requests[0].reasons
+              return Column(
+                children: snapshot.data.requests[(widget.index) - 1].reasons
+                    .map((req) => SingleChildScrollView(
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            margin: EdgeInsets.fromLTRB(1, 3, 16, 3),
+                            decoration: BoxDecoration(
+                                color: Colors.deepPurple,
+                                borderRadius: BorderRadius.horizontal(
+                                  right: Radius.circular(16),
+                                )),
+                            child: Column(
+                              children: <Widget>[
+                                Wrap(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          height: 10,
+                                          width: 10,
+                                          decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Container(
+                                          child: Expanded(
+                                            child: Text(
+                                              req.reason,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .title
+                                                  .copyWith(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                  ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              );
+              /* 
+               return ListView(
+                children: snapshot.data.requests[0].requestTypes
                     .map(
-                      (res) => ListTile(
-                        leading: Text("${res.requestId}"),
-                        title: Text(res.reason),
+                      (req) => ListTile(
+                        leading: Text("${req.requestId}"),
+                        title: Text(req.request),
                       ),
                     )
                     .toList(),
-              );
+              ); */
             }
           },
         ));

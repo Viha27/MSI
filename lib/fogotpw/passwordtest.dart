@@ -79,8 +79,8 @@ class _SigninpState extends State<SignpIn> {
                       Row(
                         children: [
                           Container(
-                            width: 60,
-                            height: 55,
+                            width: 50,
+                            height: 50,
                             decoration: BoxDecoration(
                               color: Colors.pinkAccent,
                               borderRadius:
@@ -88,7 +88,7 @@ class _SigninpState extends State<SignpIn> {
                             ),
                             child: Icon(
                               Icons.quick_contacts_mail_rounded,
-                              size: 50,
+                              size: 49,
                               color: Colors.white,
                             ),
                           ),
@@ -135,7 +135,7 @@ class _SigninpState extends State<SignpIn> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '      USERNAME :',
+                                          '       USERNAME :',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.brown),

@@ -1,3 +1,4 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -81,66 +82,118 @@ class _ReqspState extends State<Reqsp> {
               // Show data if exist
               return Column(
                 children: snapshot.data.notifications
-                    .map(
-                      (req) => Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          shadowColor: Colors.brown,
-                          margin: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 5.0),
-                          child: ListTile(
-                              title: Column(children: [
-                            Row(
-                              children: [
-                                Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: Colors.pinkAccent,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                    .map((req) => SingleChildScrollView(
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            margin: EdgeInsets.fromLTRB(1, 3, 16, 3),
+                            decoration: BoxDecoration(
+                                color: Colors.deepPurple,
+                                borderRadius: BorderRadius.horizontal(
+                                  right: Radius.circular(16),
+                                )),
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        req.subject,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .title
+                                            .copyWith(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                            ),
+                                      ),
                                     ),
-                                    child: Text('')),
-                                SizedBox(
-                                  width: 20,
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 10,
+                                      width: 10,
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueAccent,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      req.message,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle
+                                          .copyWith(
+                                              color: Colors.yellowAccent,
+                                              fontSize: 18),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
-                                  width: 250,
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 30,
+                                  height: 6,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 10,
+                                      width: 10,
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueAccent,
+                                        shape: BoxShape.circle,
                                       ),
-                                      Text(
-                                        req.sentBy,
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      'From : ' + req.sentBy,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle
+                                          .copyWith(
+                                            color: Colors.white,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 10,
+                                      width: 10,
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueAccent,
+                                        shape: BoxShape.circle,
                                       ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      SizedBox(
-                                        height: 3,
-                                      ),
-                                      SizedBox(
-                                        height: 3,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      (DateTimeFormat.format(req.timeSent,
+                                          format: 'D, M j, H:i')),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle
+                                          .copyWith(
+                                            color: Colors.white,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
                                 )
                               ],
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ]))),
-                    )
+                          ),
+                        ))
                     .toList(),
               );
               /* 

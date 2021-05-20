@@ -117,7 +117,7 @@ class _MyAppState extends State<Profilepage> {
                                             style: TextStyle(
                                                 fontSize: 18.0,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.brown),
+                                                color: Colors.purple),
                                           ),
                                         ],
                                       ),
@@ -147,7 +147,7 @@ class _MyAppState extends State<Profilepage> {
                                             style: TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.brown),
+                                                color: Colors.purple),
                                           ),
                                         ],
                                       ),
@@ -185,7 +185,7 @@ class _MyAppState extends State<Profilepage> {
                                             style: TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.brown),
+                                                color: Colors.purple),
                                           ),
                                         ],
                                       ),
@@ -223,7 +223,7 @@ class _MyAppState extends State<Profilepage> {
                                             style: TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.brown),
+                                                color: Colors.purple),
                                           ),
                                         ],
                                       ),
@@ -259,7 +259,7 @@ class _MyAppState extends State<Profilepage> {
                                             style: TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.brown),
+                                                color: Colors.purple),
                                           ),
                                         ),
                                         flex: 2,
@@ -271,7 +271,7 @@ class _MyAppState extends State<Profilepage> {
                                             style: TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.brown),
+                                                color: Colors.purple),
                                           ),
                                         ),
                                         flex: 2,
